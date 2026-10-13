@@ -54,6 +54,7 @@ def run(verbose: bool = True) -> dict:
         print(f"FOCUS export -> outputs/focus_export.csv ({len(focus)} rows)")
 
     return {"by_team": {k: round(v, 2) for k, v in by_team.items()},
+            "by_team_exact": dict(by_team),
             "by_project": {k: round(v, 2) for k, v in by_project.items()},
             "tag_coverage": round(coverage, 3), "chargeback_ready": ready}
 

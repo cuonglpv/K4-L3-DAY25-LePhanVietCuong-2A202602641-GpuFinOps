@@ -1,5 +1,25 @@
 # Lab 25 — Tối ưu hóa Chi phí GPU (GPU FinOps Workshop)
 
+## Bài nộp — Lê Phan Việt Cường · 2A202602641
+
+Đã chọn **Extension 4 (Reasoning budget)** và **Extension 5 (Carbon-aware scheduling)**.
+M2 phân rã cascade → cache → batch; M5 tự sinh báo cáo, biểu đồ và bài viết từ cùng dữ liệu seed=25.
+
+```powershell
+python data/generate.py
+python missions/run_all.py
+python verify.py
+pytest -q
+python -m missions.check_extensions
+```
+
+Kết quả: `outputs/report.md`, `outputs/savings.png`, `outputs/focus_export.csv`, `outputs/writeup.md`.
+Bằng chứng trước/sau: `outputs/before_extensions.json`, `outputs/extension_results.json`;
+khám phá dữ liệu bằng pandas: `outputs/data_summary.json`.
+Phân tích Guide 4.3, 5.4, 6.4, 7.4 và các giả định nằm trong báo cáo.
+M5 là projection theo công thức lab; chưa chứng minh các khoản savings không trùng lặp.
+Extension carbon dùng ngày thực tế; M3/M5 dùng tháng giả định 30 ngày.
+
 > **AICB · Phase 2 · Track 2 (Infrastructure) · Day 25**
 > Kết hợp với slide `day25-gpu-finops-cost-optimization`.
 > Đầu ra chính: **Báo cáo chi phí GPU (baseline vs. optimized)** — đầu vào cho Milestone 2.

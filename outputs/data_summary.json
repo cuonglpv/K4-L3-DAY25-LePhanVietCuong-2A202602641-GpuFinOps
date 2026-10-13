@@ -1,0 +1,114 @@
+{
+  "price_catalog.csv": {
+    "rows": 7,
+    "columns": [
+      "gpu_type",
+      "provider_class",
+      "on_demand_hr",
+      "spot_hr",
+      "reserved_1yr_hr",
+      "reserved_3yr_hr",
+      "hbm_gb",
+      "peak_tflops_fp16",
+      "peak_tflops_fp4",
+      "peak_bw_tbs",
+      "watts"
+    ],
+    "missing": {
+      "gpu_type": 0,
+      "provider_class": 0,
+      "on_demand_hr": 0,
+      "spot_hr": 0,
+      "reserved_1yr_hr": 0,
+      "reserved_3yr_hr": 0,
+      "hbm_gb": 0,
+      "peak_tflops_fp16": 0,
+      "peak_tflops_fp4": 0,
+      "peak_bw_tbs": 0,
+      "watts": 0
+    }
+  },
+  "gpu_telemetry.csv": {
+    "rows": 264,
+    "columns": [
+      "ts",
+      "gpu_id",
+      "gpu_type",
+      "gpu_util_pct",
+      "sm_active_pct",
+      "tensor_active_pct",
+      "dram_active_pct",
+      "power_w",
+      "mem_used_gb",
+      "achieved_tflops",
+      "achieved_bw_tbs",
+      "workload"
+    ],
+    "missing": {
+      "ts": 0,
+      "gpu_id": 0,
+      "gpu_type": 0,
+      "gpu_util_pct": 0,
+      "sm_active_pct": 0,
+      "tensor_active_pct": 0,
+      "dram_active_pct": 0,
+      "power_w": 0,
+      "mem_used_gb": 0,
+      "achieved_tflops": 0,
+      "achieved_bw_tbs": 0,
+      "workload": 0
+    }
+  },
+  "token_usage.csv": {
+    "rows": 2400,
+    "columns": [
+      "ts",
+      "model",
+      "team",
+      "project",
+      "route_tier",
+      "input_tokens",
+      "output_tokens",
+      "cached_input_tokens",
+      "is_batch",
+      "is_reasoning",
+      "latency_ms"
+    ],
+    "missing": {
+      "ts": 0,
+      "model": 0,
+      "team": 0,
+      "project": 197,
+      "route_tier": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cached_input_tokens": 0,
+      "is_batch": 0,
+      "is_reasoning": 0,
+      "latency_ms": 0
+    }
+  },
+  "workloads.csv": {
+    "rows": 8,
+    "columns": [
+      "job_id",
+      "team",
+      "kind",
+      "hours_per_day",
+      "days",
+      "interruptible",
+      "gpu_type",
+      "num_gpus"
+    ],
+    "missing": {
+      "job_id": 0,
+      "team": 0,
+      "kind": 0,
+      "hours_per_day": 0,
+      "days": 0,
+      "interruptible": 0,
+      "gpu_type": 0,
+      "num_gpus": 0
+    }
+  }
+}

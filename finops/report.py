@@ -29,13 +29,13 @@ def build_report(baseline_usd: float, optimized_usd: float, levers: dict,
             "",
             f"- Energy per query: {sustainability.get('wh_per_query', 0):.2f} Wh",
             f"- Carbon per query: {sustainability.get('carbon_g', 0):.3f} gCO2e",
-            f"- Cheapest+cleanest region: {sustainability.get('best_region', 'n/a')}",
+            f"- Cleanest region: {sustainability.get('best_region', 'n/a')}",
         ]
     lines += ["", "_Figures are June-2026 as-of snapshots; re-baseline before acting._"]
     return "\n".join(lines)
 
 
-def savings_waterfall(levers: dict, path: str) -> str:
+def savings_waterfall(levers: dict, path: str, baseline: float | None = None) -> str:
     """Write a simple savings bar chart PNG. Returns the path. No-op if matplotlib absent."""
     try:
         import matplotlib
@@ -45,10 +45,28 @@ def savings_waterfall(levers: dict, path: str) -> str:
         return ""
     names = list(levers.keys())
     vals = [levers[n] for n in names]
-    fig, ax = plt.subplots(figsize=(8, 4.5))
-    ax.bar(names, vals, color="#2e548a")
-    ax.set_ylabel("Savings (USD / month)")
-    ax.set_title("GPU cost savings by FinOps lever")
+    fig, ax = plt.subplots(figsize=(11, 5.5))
+    if baseline is None:
+        bars = ax.bar(names, vals, color="#2e548a")
+    else:
+        remaining = baseline
+        bottoms = [0]
+        heights = [baseline]
+        for value in vals:
+            remaining -= value
+            bottoms.append(remaining)
+            heights.append(value)
+        bottoms.append(0)
+        heights.append(remaining)
+        names = ["Baseline"] + names + ["Optimized"]
+        bars = ax.bar(names, heights, bottom=bottoms,
+                      color=["#2e548a"] + ["#38956b"] * len(vals) + ["#2e548a"])
+        for bar, value in zip(bars, heights):
+            ax.text(bar.get_x() + bar.get_width()/2, bar.get_y() + bar.get_height() + 120,
+                    f"${value:,.0f}", ha="center", fontsize=9)
+        ax.set_ylim(0, baseline * 1.15)
+    ax.set_ylabel("USD / modeled 30-day month")
+    ax.set_title("Lab portfolio scenario: baseline, four savings levers, optimized")
     plt.xticks(rotation=20, ha="right")
     plt.tight_layout()
     fig.savefig(path, dpi=110)
